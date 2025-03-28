@@ -1,0 +1,26 @@
+#![allow(dead_code, unused_variables, non_snake_case)]
+
+use std::collections::VecDeque;
+
+struct Solution;
+
+impl Solution {
+    pub fn numIslands(grid: &Vec<Vec<i32>>) -> i32 {
+
+    const Dirictions: [(i8, i8); 4] = [(0, 1), (0, -1), (1, 0), (-1, 0)];
+        let rows = grid.len();
+        let cols = grid[0].len();
+        let mut num_of_islands: i32 = 0;
+        let mut dq: VecDeque<(usize, usize)> = VecDeque::new();
+        let mut visited: Vec<Vec<bool>> = vec![vec![false; cols]; rows];
+        dq.push_back((0, 0));
+
+        while let Some((x, y)) = dq.pop_front() {
+            visited[x][y] = true;
+            print!("{:?} ", (x, y));
+            for (dx , dy) in 
+        }
+
+        num_of_islands
+    }
+}

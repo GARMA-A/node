@@ -23,22 +23,22 @@ console.log(os.uptime());
 const { uptime } = require('os');
 console.log(uptime());
 
-'''
+```
 
 
 <hr/>
 
 
 ### ES6 modules
+
 ```javascript
-'''javascript
 
 import os from 'os';
 console.log(os.uptime());
 
 import { uptime } from 'os';
 console.log(uptime());
-'''
+```
 
 <hr/>
 
@@ -52,11 +52,27 @@ console.log(uptime());
 ### but we need to use in out package.json file "type": "module" to use import
 ### or to use .mjs file extension
 
-<hr/>
 
-<img  src="Node_core_modules_imgs/node_core_modules9.png"/ > 
 
-<img  src="Node_core_modules_imgs/node_core_modules10.png"/ > 
+<img  src="Node_core_modules_imgs/node_core_modules9.png"/> 
+
+<img  src="Node_core_modules_imgs/node_core_modules10.png"/> 
+
+## this objects are avilable by default in any .ts or .js file 
+
+<img  src="Node_core_modules_imgs/node_core_modules11.png"/> 
+<img  src="Node_core_modules_imgs/node_core_modules12.png"/> 
+
+#### Two variables that are very useful in application development are
+#### __filename and __dirname. As the names of these variables already
+#### suggest, both contain information about the location of the file, which
+#### stores the source code of the currently executed script. The string in
+#### __filename is the absolute path and file name of the script. __dirname
+#### is just the path
+
+
+
+
 
 
 
