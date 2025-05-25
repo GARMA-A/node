@@ -1,17 +1,12 @@
 import express from "express";
+import { router as movieRouter } from "./movie/index.js";
 
 let app = express();
 
+app.use("/movies", movieRouter);
 
-app.get("/", (req, res) => {
-	res.send("<h1> Wlecome to your first express app </h1>");
-	console.log(req.originalUrl); //  "/"
-	console.log(req.method); // "GET"
-	console.log(req.params);  // {}
-	console.log(req.path); // "/"
-	console.log(req.protocol); // "http"
-	console.log(req.query); // {}
-
+app.get("/", (_, res) => {
+	res.redirect("/movies");
 
 });
 

@@ -58,11 +58,3 @@ while(k < n) // space 1 time n+1
 // total space complexity O(n)
 
 ```
-
-```javascript
-```
-
-
-
-```javascript
-```

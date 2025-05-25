@@ -21,8 +21,15 @@ app.listen(8080, () => {
 
 ```
 ## see `express_Req_methods 1 and 2`
-![express_Req_methods](./express_Req_methods1.png)
+
+![express_Req_methods 1](./express_Req_methods1.png)
 ![express_Req_methods 2](./express_Req_methods2.png)
+
+## see `express_Res_methods 1 and 2`
+
+![express_Res_methods 1](./express_Res_methods1.png)
+![express_Res_methods 2](./express_Res_methods2.png)
+
 
 
 
