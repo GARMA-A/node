@@ -1,0 +1,21 @@
+{
+  "ts-node": {
+    "esm": true                          // 👈 Required to support ESM with ts-node
+
+  },
+
+  "compilerOptions": {
+    "target": "ES2020",                   // or "ESNext"
+    "module": "ESNext",                   // must be ESNext or ES2022 to support ESM
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+  "allowImportingTsExtensions": true
+
+  }
+}

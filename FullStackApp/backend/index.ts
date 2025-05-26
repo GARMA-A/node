@@ -1,4 +1,5 @@
 import express from 'express';
+import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import { movieAddRouter } from './CRUD_aperations/addMovie.js';
@@ -13,7 +14,7 @@ app.use(express.json());
 app.use(cors());
 dotenv.config();
 
-app.get('/', (_, res) => {
+app.get('/', (_: Request, res: Response) => {
 	res.send('Hello World!');
 });
 app.post('/sendmovie', movieAddRouter);
@@ -28,7 +29,7 @@ app.delete('/deleteMovie', deleteMovieRouter);
 
 
 
-mongoose.connect(process.env.DATABASE_URL)
+mongoose.connect(process.env.DATABASE_URL as string)
 	.then(() => {
 		console.log('Connected to MongoDB');
 
