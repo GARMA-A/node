@@ -7,6 +7,7 @@ import { viewAllMoviesRouter } from './CRUD_aperations/viewAllMovies.js';
 import { viewSingleMovieRouter } from './CRUD_aperations/viewSingleMovie.js';
 import { updateMovieRouter } from './CRUD_aperations/updateMovie.js';
 import { deleteMovieRouter } from './CRUD_aperations/deleteMovie.js';
+import { viewAllMoviesByNameRouter } from './CRUD_aperations/viewAllMoviesByName.js';
 import cors from 'cors';
 
 const app = express();
@@ -17,11 +18,14 @@ dotenv.config();
 app.get('/', (_: Request, res: Response) => {
 	res.send('Hello World!');
 });
-app.post('/sendmovie', movieAddRouter);
 
 app.get('/getAllMovies', viewAllMoviesRouter);
 
 app.get('/getSingleMovie', viewSingleMovieRouter);
+
+app.get('/GetAllMoviesByTitle', viewAllMoviesByNameRouter);
+
+app.post('/sendmovie', movieAddRouter);
 
 app.put('/updateMovie', updateMovieRouter);
 

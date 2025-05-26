@@ -4,6 +4,7 @@ type MovieDocument = Document & {
 	title: string;
 	releaseYear: number;
 	rating?: number;
+	_id?: mongoose.Types.ObjectId;
 	createdAt?: Date;
 	updatedAt?: Date;
 };
