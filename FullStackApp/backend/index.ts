@@ -33,7 +33,7 @@ app.delete('/deleteMovie', deleteMovieRouter);
 
 
 
-mongoose.connect(process.env.DATABASE_URL as string)
+mongoose.connect("mongodb://mongo:27017/Movie")
 	.then(() => {
 		console.log('Connected to MongoDB');
 

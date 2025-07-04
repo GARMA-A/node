@@ -55,7 +55,7 @@ export default function AddPage({ movie, setMovie, error, setError, loading, set
 
     return (
         <div className="bg-gray-900 text-white flex flex-col items-center 
-            justify-center min-h-screen">
+            justify-center min-h-screen ">
             <MovieForm loading={loading} setSubmit={setSubmit} setMovie={setMovie} movie={movie} submit={submit} />
             {!loading && <ErrorMessage error={error} />}
             <LoadingSpinner loading={loading} />
