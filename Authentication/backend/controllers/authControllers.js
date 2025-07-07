@@ -24,7 +24,7 @@ const register = async (req, res) => {
 		}
 
 
-	}, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: 20 });
+	}, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: 15 });
 
 	const refreshToken = jwt.sign({
 		UserInfo: {
@@ -32,7 +32,7 @@ const register = async (req, res) => {
 		}
 
 
-	}, process.env.REFRESH_TOKEN_SECRET_KEY, { expiresIn: 20 });
+	}, process.env.REFRESH_TOKEN_SECRET_KEY, { expiresIn: "7d" });
 	res.cookie("jwt", refreshToken, {
 		httpOnly: true, // only access by the http or https
 		// secure: true, // onyl i can access the token by https not http
@@ -68,7 +68,7 @@ const login = async (req, res) => {
 		}
 
 
-	}, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: "15m" });
+	}, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: 15 });
 
 	const refreshToken = jwt.sign({
 		UserInfo: {
@@ -87,10 +87,33 @@ const login = async (req, res) => {
 
 };
 
+const refresh = async (req, res) => {
+	const cookies = req.cookies;
+	if (!cookies?.jwt) return res.status(401).send({ "message": "jwt cookie not found unauthorized" });
+
+	const refreshToken = cookies.jwt;
+
+	jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET_KEY, (err, decoded) => {
+		if (err) return res.status(403).send({ "message": "forbidden" });
+		const found_user = User.findById(decoded.UserInfo.id).exec();
+		if (!found_user)
+			return res.status(401).send({ "message": "user not found" });
+		const accessToken = jwt.sign({
+			UserInfo: {
+				id: decoded.UserInfo.id
+			}
+		}, process.env.ACCESS_TOKEN_SECRET_KEY, { expiresIn: 15 });
+
+
+		res.json({ accessToken });
+	});
+};
+
 
 module.exports = {
 	register,
-	login
+	login,
+	refresh
 };
 
 
