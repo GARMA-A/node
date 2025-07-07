@@ -18,18 +18,21 @@ app.use("/", require("./routes/root"));
 app.use("/auth", require("./routes/authRoutes"));
 app.use("/users", require("./routes/userRoutes"));
 
-
-// app.all(RegExp("/*"), (req, res) => {
+// app.all("*", (req, res) => {
 // 	res.status(404);
-// 	if (req.accepts("html"))
-// 		res.sendFile(path.join(__dirname, "views", "404.html"));
-// 	else if (req.accepts("json"))
+// 	if (req.accepts("html")) {
+// 		res.sendFile(path.join(__dirname, "views", "404.html"), err => {
+// 			if (err) {
+// 				res.type("text").send("404 Not Found");
+// 			}
+// 		});
+// 	} else if (req.accepts("json")) {
 // 		res.json({ message: "This Page Does Not Exist" });
-// 	else
+// 	} else {
 // 		res.type("text").send("This Page Does Not Exist");
-// 	res.end();
+// 	}
 // });
-
+//
 
 
 mongoose.connection.once('open', () => {

@@ -87,6 +87,15 @@ const login = async (req, res) => {
 
 };
 
+const logout = async (req, res) => {
+	const cookies = req.cookies;
+	if (!cookies?.jwt) return res.sendStatus(204); // No content
+
+	// Clear the cookie
+	res.clearCookie("jwt", { httpOnly: true, sameSite: "None" });
+	res.json({ "message": "cookie cleared" });
+}
+
 const refresh = async (req, res) => {
 	const cookies = req.cookies;
 	if (!cookies?.jwt) return res.status(401).send({ "message": "jwt cookie not found unauthorized" });
@@ -113,6 +122,7 @@ const refresh = async (req, res) => {
 module.exports = {
 	register,
 	login,
+	logout,
 	refresh
 };
 
