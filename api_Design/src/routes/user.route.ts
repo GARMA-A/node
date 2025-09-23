@@ -13,7 +13,6 @@ userRoutes.get('/:id', (req, res) => {
 });
 
 userRoutes.put('/:id', (req, res) => {
-
 	const id = req.params.id;
 	res.status(200).json({ message: 'change User', id });
 });

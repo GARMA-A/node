@@ -1,13 +1,16 @@
 import express from 'express';
 import morgan from 'morgan';
-import { baseRouter } from './routes/base.ts';
-import { protect } from './modules/auth.ts';
-import { signIn, createUser } from './handlers/user.ts';
+import { baseRouter } from './routes/base.route.ts';
+import { protect } from './middlewares/auth.midleware.ts';
+import { signIn, signUp } from './controllers/auth.controller.ts';
+import { isUserNotExist } from './middlewares/user.middleware.ts';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(morgan('dev'));
 
 
@@ -17,7 +20,7 @@ app.get('/', (_, res) => {
 
 app.use("/api", protect, baseRouter);
 
-app.post("/user", createUser);
+app.post("/signup", isUserNotExist, signUp);
 
 app.post("/signin", signIn);
 

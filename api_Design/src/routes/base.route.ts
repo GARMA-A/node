@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { productRoutes } from './product.ts';
-import { updateRoutes } from './update.ts';
-import { updatePointRoutes } from './updatePoint.ts';
-import { userRoutes } from './user.ts';
+import { productRoutes } from './product.route.ts';
+import { updateRoutes } from './update.route.ts';
+import { updatePointRoutes } from './updatePoint.route.ts';
+import { userRoutes } from './user.route.ts';
 
 
 export const baseRouter = Router();
