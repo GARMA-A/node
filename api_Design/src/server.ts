@@ -2,7 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import { baseRouter } from './routes/base.route.ts';
 import { protect } from './middlewares/auth.midleware.ts';
-import { signIn, signUp } from './controllers/auth.controller.ts';
+import { refresh, signIn, signOut, signUp } from './controllers/auth.controller.ts';
 import { isUserNotExist } from './middlewares/user.middleware.ts';
 import cookieParser from 'cookie-parser';
 
@@ -23,6 +23,10 @@ app.use("/api", protect, baseRouter);
 app.post("/signup", isUserNotExist, signUp);
 
 app.post("/signin", signIn);
+
+app.get("/refresh", protect, refresh);
+
+app.get("/signout", signOut);
 
 
 

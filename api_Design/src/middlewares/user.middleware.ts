@@ -2,8 +2,8 @@ import { type Request, type Response, type NextFunction } from 'express';
 import prisma from '../config/db.ts';
 
 export const isUserNotExist = async (req: Request, res: Response, next: NextFunction) => {
-	const user = req.body as { username: string, userId: string };
-	if (!user.username || !user.userId) {
+	const user = req.body as { username: string };
+	if (!user.username) {
 		return res.status(400).json({ error: "Username and id are required" });
 	}
 	const found = await prisma.user.findUnique({

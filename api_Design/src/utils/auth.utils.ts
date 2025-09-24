@@ -1,18 +1,17 @@
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { ACCESS_TOKEN_EXPIRE, ACCESS_TOKEN_SECRET, REFRESH_TOKEN_EXPIRE, REFRESH_TOKEN_SECRET } from './constants.ts';
 
 export const createAccessToken = (userId: string, username: string) => {
-	const access_secret = process.env.JWT_ACCESS_SECRET || "access_secret";
-	return jwt.sign({ id: userId, username },
-		access_secret,
-		{ expiresIn: '1h' }
+	return jwt.sign({ userId, username },
+		ACCESS_TOKEN_SECRET,
+		{ expiresIn: ACCESS_TOKEN_EXPIRE }
 	);
 }
 export const createRefreshToken = (userId: string, username: string) => {
-	const refresh_secret = process.env.JWT_REFRESH_SECRET || "refresh_secret";
-	const refresh_token = jwt.sign({ id: userId, username },
-		refresh_secret,
-		{ expiresIn: '7d' }
+	const refresh_token = jwt.sign({ userId, username },
+		REFRESH_TOKEN_SECRET,
+		{ expiresIn: REFRESH_TOKEN_EXPIRE }
 	);
 	return refresh_token;
 }

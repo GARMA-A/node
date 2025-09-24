@@ -2,9 +2,13 @@ import { type Request, type Response } from 'express';
 import prisma from '../config/db.ts';
 
 export const getProducts = async (req: Request, res: Response) => {
+	const reqUser = req.user
+	if (!reqUser) {
+		return res.status(401).json({ message: 'Unauthorized' })
+	}
 	const user = await prisma.user.findUnique({
 		where: {
-			id: req.user!.userId
+			id: reqUser.userId
 		},
 		include: {
 			products: true
@@ -13,11 +17,15 @@ export const getProducts = async (req: Request, res: Response) => {
 	res.status(200).json({ products: user?.products || [] })
 }
 export const getOneProduct = async (req: Request, res: Response) => {
+	const reqUser = req.user
+	if (!reqUser) {
+		return res.status(401).json({ message: 'Unauthorized' })
+	}
 	const { id } = req.params
 	const product = await prisma.product.findFirst({
 		where: {
 			id,
-			belongsToId: req.user!.userId
+			belongsToId: reqUser.userId
 		}
 	})
 	if (!product) {
@@ -32,12 +40,16 @@ export const createProduct = async (req: Request, res: Response) => {
 	if (!name || !description || !price) {
 		return res.status(400).json({ message: 'Missing required fields' })
 	}
+	const reqUser = req.user
+	if (!reqUser) {
+		return res.status(401).json({ message: 'Unauthorized' })
+	}
 	const product = await prisma.product.create({
 		data: {
 			name,
 			description,
 			price: parseFloat(price),
-			belongsToId: req.user!.userId
+			belongsToId: reqUser.userId
 		}
 	})
 	res.status(201).json({ product })
@@ -48,10 +60,14 @@ export const updateProduct = async (req: Request, res: Response) => {
 	if (!name && !description && !price) {
 		return res.status(400).json({ message: 'Missing required fields' })
 	}
+	const reqUser = req.user
+	if (!reqUser) {
+		return res.status(401).json({ message: 'Unauthorized' })
+	}
 	const product = await prisma.product.findFirst({
 		where: {
 			id,
-			belongsToId: req.user!.userId
+			belongsToId: reqUser.userId
 		}
 	})
 	if (!product) {
@@ -72,10 +88,14 @@ export const updateProduct = async (req: Request, res: Response) => {
 
 export const deleteProduct = async (req: Request, res: Response) => {
 	const { id } = req.params
+	const reqUser = req.user
+	if (!reqUser) {
+		return res.status(401).json({ message: 'Unauthorized' })
+	}
 	const product = await prisma.product.findFirst({
 		where: {
 			id,
-			belongsToId: req.user!.userId
+			belongsToId: reqUser.userId
 		}
 	})
 	if (!product) {

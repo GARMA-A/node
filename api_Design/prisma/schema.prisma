@@ -30,7 +30,9 @@ model Product {
   price       Float
   belongsToId String
   belongsTo   User     @relation(fields: [belongsToId], references: [id])
-  Update      Update[]
+  Updates     Update[]
+
+  @@unique([id, belongsToId])
 }
 
 enum UPDATE_STATUS {

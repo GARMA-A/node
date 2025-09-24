@@ -1,4 +1,6 @@
 import { Router, type Request, type Response } from 'express';
+import { validateCreateUpdate } from '../utils/update.validator.utils.ts';
+import { handleInputErrors } from '../middlewares/general.middleware.ts';
 
 
 export const updateRoutes = Router();
@@ -19,9 +21,12 @@ updateRoutes.put('/:id', (req, res) => {
 });
 
 
-updateRoutes.post('/', (req, res) => {
-	res.status(200).json({ message: 'create new update' });
-});
+updateRoutes.post('/',
+	validateCreateUpdate,
+	handleInputErrors,
+	(req: Request, res: Response) => {
+		res.status(200).json({ message: 'create new update' });
+	});
 
 
 updateRoutes.delete('/:id', (req, res) => {
