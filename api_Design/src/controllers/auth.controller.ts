@@ -2,7 +2,7 @@ import { type Request, type Response } from 'express';
 import prisma from "../config/db.ts";
 import { comparePasswords, createAccessToken, createRefreshToken, hashPassword } from "../utils/auth.utils.ts";
 import jwt from 'jsonwebtoken';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../utils/constants.ts';
+import { ACCESS_TOKEN, REFRESH_TOKEN, REFRESH_TOKEN_SECRET } from '../utils/constants.ts';
 
 
 
@@ -60,13 +60,14 @@ export const signIn = async (req: Request, res: Response) => {
 }
 
 
+
 export const refresh = (req: Request, res: Response) => {
-	const { refreshToken } = req.cookies;
+	const refreshToken = req.cookies[REFRESH_TOKEN];
 	if (!refreshToken) {
 		return res.status(401).json({ message: 'There is no token' });
 	}
 	try {
-		const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET as string);
+		const decoded = jwt.verify(refreshToken, REFRESH_TOKEN_SECRET);
 		req.user = decoded as { userId: string, username: string };
 
 		res.cookie(ACCESS_TOKEN, createAccessToken(req.user.userId, req.user.username), { httpOnly: true, secure: process.env.NODE_ENV === "production" });
