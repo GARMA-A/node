@@ -1,4 +1,3 @@
-// 🧠 1. Strategy Interfaces
 interface FlyBehavior {
 	fly(): void;
 }
@@ -7,7 +6,6 @@ interface QuackBehavior {
 	quack(): void;
 }
 
-// 🛠 2. Concrete Fly Behaviors
 class FlyWithWings implements FlyBehavior {
 	fly(): void {
 		console.log("🦆 I'm flying with wings!");
@@ -26,7 +24,6 @@ class FlyRocketPowered implements FlyBehavior {
 	}
 }
 
-// 🛠 3. Concrete Quack Behaviors
 class Quack implements QuackBehavior {
 	quack(): void {
 		console.log("Quack 🗣️");
@@ -45,7 +42,6 @@ class MuteQuack implements QuackBehavior {
 	}
 }
 
-// 🦆 4. Duck Abstract Class
 abstract class Duck {
 	protected flyBehavior: FlyBehavior;
 	protected quackBehavior: QuackBehavior;
@@ -78,7 +74,6 @@ abstract class Duck {
 	abstract display(): void;
 }
 
-// 🦆 5. Concrete Duck Types
 class MallardDuck extends Duck {
 	constructor() {
 		super(new FlyWithWings(), new Quack());
