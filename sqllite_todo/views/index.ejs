@@ -9,13 +9,10 @@
 
 <body>
   <h1>📝 TODO List</h1>
-
-
   <form action="/add" method="POST">
     <input type="text" name="text" placeholder="Add new task" required>
     <button type="submit">➕ Add</button>
   </form>
-
   <ul>
     <% todos.forEach(todo=> { %>
       <li>
