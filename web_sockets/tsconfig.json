@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "target": "es2020",         /* Set to a modern ECMAScript version */
+    "module": "commonjs",       /* Standard for Node.js */
+    "rootDir": "./src",         /* Where your .ts files live */
+    "outDir": "./dist",         /* Where compiled .js files will go */
+    "esModuleInterop": true,    /* Allows for cleaner imports */
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,             /* Enables all strict type-checking */
+    "skipLibCheck": true
+  }
+}

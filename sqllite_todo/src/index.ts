@@ -55,7 +55,7 @@ const server = http.createServer((req, res) => {
 	// Add todo
 	if (url === "/add" && method === "POST") {
 		let body = "";
-		req.on("data", (chunk) => (body += chunk));
+		req.on("data", chunk => body += chunk);
 		req.on("end", () => {
 			const parsed = parse(body.toString());
 			const text = parsed.text?.toString().trim();
