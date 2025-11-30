@@ -1,4 +1,4 @@
-import { Router, type Request, type Response } from 'express';
+import { Router } from 'express';
 import { validateCreateUpdate } from '../utils/update.validator.utils.ts';
 import { handleInputErrors } from '../middlewares/general.middleware.ts';
 import { createUpdate, deleteUpdate, getOneUpdate, getUpdates, updateUpdate } from '../controllers/update.controller.ts';
